@@ -26,6 +26,9 @@
             <div v-for="variant in variants" :key="variant.variantId">
                 <p>{{ variant.variantColor }}</p>
             </div>
+            <ul>
+                <li v-for="sizes in sizes">{{ sizes }}</li>
+            </ul>
         </div>
 
     </div>

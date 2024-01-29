@@ -20,7 +20,8 @@ let app = new Vue({
                 variantQuantity: 0
             }
         ],
-        cart: 0
+        cart: 0,
+        onSale: true
     },
     methods: {
         addToCart() {
@@ -41,5 +42,13 @@ let app = new Vue({
         inStock(){
             return this.variants[this.selectedVariant].variantQuantity
         },
+        sale(){
+            if (this.onSale) {
+                return this.brand + ' ' + this.product + ' On Sale!'
+            }
+            return  this.brand + ' ' + this.product + ' Not On Sale'
+        }
+
+
     }
 })

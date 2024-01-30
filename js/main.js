@@ -140,17 +140,17 @@ Vue.component('tabs-information', {
             <li v-for="detail in details">{{ detail }}</li>
           </ul>
         </div>
-        <div v-show="selectedTab === 'Sizes'">
-            <ul>
-                <li v-for="sizes in sizes">{{ sizes }}</li>
-            </ul>
-        </div>
+<!--        <div v-show="selectedTab === 'Sizes'">-->
+<!--            <ul>-->
+<!--                <li v-for="sizes in sizes">{{ sizes }}</li>-->
+<!--            </ul>-->
+<!--        </div>-->
     
       </div>
     `,
     data() {
         return {
-            tabs: ['Shipping', 'Details', 'Sizes'],
+            tabs: ['Shipping', 'Details', ],
             selectedTab: 'Shipping'
         }
     }
@@ -174,7 +174,15 @@ Vue.component('product', {
            <h1>{{ title }}</h1>
            <p v-if="inStock">In stock</p>
            <p v-else>Out of Stock</p>
-           <tabs-information :shipping="shipping" :details="details" :sizes="sizes"></tabs-information>
+           <tabs-information :shipping="shipping" :details="details" ></tabs-information>
+           
+           <button :class="{ disabledButton: !noSizeS}" >S</button>
+           <button :class="{ disabledButton: !noSizeM}" >M</button>
+           <button :class="{ disabledButton: !noSizeL }" >L</button>
+           <button :class="{ disabledButton: !noSizeXl }" >XL</button>
+           <button :class="{ disabledButton: !noSizeXxl }" >XXL</button>
+           <button :class="{ disabledButton: !noSizeXxxl }" >XXXL</button>
+           
            <div
                    class="color-box"
                    v-for="(variant, index) in variants"
@@ -197,14 +205,19 @@ Vue.component('product', {
             brand: 'Vue Mastery',
             selectedVariant: 0,
             altText: "A pair of socks",
-            altText: "A pair of socks",
             details: ['80% cotton', '20% polyester', 'Gender-neutral'],
             variants: [
                 {
                     variantId: 2234,
                     variantColor: 'green',
                     variantImage: "./assets/vmSocks-green-onWhite.jpg",
-                    variantQuantity: 10
+                    variantQuantity: 10,
+                    sizeS:0,
+                    sizeM: 70,
+                    sizeL:12,
+                    sizeXl: 10,
+                    sizeXxl:0,
+                    sizeXxxl: 10,
                 },
                 {
                     variantId: 2235,
@@ -213,7 +226,6 @@ Vue.component('product', {
                     variantQuantity: 0
                 }
             ],
-            sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
             reviews: []
         }
     },
@@ -235,7 +247,25 @@ Vue.component('product', {
             return this.variants[this.selectedVariant].variantImage;
         },
         inStock() {
-            return this.variants[this.selectedVariant].variantQuantity
+            return this.variants[this.selectedVariant].variantQuantity;
+        },
+        noSizeS(){
+            return this.variants[this.selectedVariant].sizeS;
+        },
+        noSizeM(){
+            return this.variants[this.selectedVariant].sizeM;
+        },
+        noSizeL(){
+            return this.variants[this.selectedVariant].sizeL;
+        },
+        noSizeXl(){
+            return this.variants[this.selectedVariant].sizeXl;
+        },
+        noSizeXxl(){
+            return this.variants[this.selectedVariant].sizeXxl;
+        },
+        noSizeXxxl(){
+            return this.variants[this.selectedVariant].sizeXxxl;
         },
         shipping() {
             if (this.premium) {
